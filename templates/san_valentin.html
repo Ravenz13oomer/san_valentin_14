@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Valentín</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Incluir la librería p5.js desde un CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+</head>
+<body class="fondo-san-valentin">
+    <div class="contenido">
+        <!-- Contenedor de imágenes -->
+        <div class="imagenes-container">
+            <img src="{{ url_for('static', filename='alexa.jpg') }}" alt="Alexa" class="imagen-central">
+            <img src="{{ url_for('static', filename='alexa3.jpg') }}" alt="Alexa" class="imagen-lateral">
+        </div>
+
+        <!-- Pregunta -->
+        <h1 class="pregunta">¿Quieres ser mi San Valentín? 💖</h1>
+
+        <!-- Botones -->
+        <div class="botones-container">
+            <button id="yes-btn">Sí 💕</button>
+            <button id="no-btn">No 💔</button>
+        </div>
+
+        <!-- Contenedor para el dibujo del corazón -->
+        <div id="corazon-container"></div>
+    </div>
+
+    <!-- Audio de fondo -->
+    <audio id="musica" src="{{ url_for('static', filename='romantica.mp3') }}" autoplay loop></audio>
+
+    <!-- Script personalizado -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+    <!-- Script para dibujar el corazón con p5.js -->
+    <script>
+        // Función para dibujar el corazón
+        function dibujarCorazon() {
+            // Eliminar cualquier lienzo existente
+            const container = document.getElementById("corazon-container");
+            container.innerHTML = "";
+
+            // Crear un nuevo lienzo con p5.js
+            new p5(function (p) {
+                p.setup = function () {
+                    // Crear un lienzo de 300x300 píxeles
+                    const canvas = p.createCanvas(300, 300);
+                    canvas.parent("corazon-container");  // Asociar el lienzo al contenedor
+                    p.background(255, 182, 193, 0);  // Fondo transparente
+                    p.noStroke();  // Sin bordes
+                    p.fill(255, 105, 180);  // Color rosa
+                    p.translate(150, 150);  // Centrar el dibujo
+
+                    // Dibujar el corazón
+                    p.beginShape();
+                    p.vertex(0, -100);
+                    p.bezierVertex(50, -150, 100, -50, 0, 50);
+                    p.bezierVertex(-100, -50, -50, -150, 0, -100);
+                    p.endShape(p.CLOSE);
+                };
+            });
+        }
+
+        // Asignar la función al botón "Sí"
+        document.getElementById("yes-btn").addEventListener("click", function () {
+            dibujarCorazon();  // Dibujar el corazón
+            alert("💖 ¡Sabía que dirías que sí! 💖");  // Mostrar mensaje
+        });
+    </script>
+</body>
+</html>

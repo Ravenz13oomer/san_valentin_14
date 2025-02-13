@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Valentín</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="fondo-estrellas">
+    <div class="input-container">
+        <h1>Ingresa tu nombre</h1>
+        <input type="text" id="nombre" placeholder="Escribe tu nombre...">
+        <button onclick="verificarNombre()">Entrar</button>
+        <p id="mensaje"></p>
+    </div>
+
+    <audio id="audio-fondo" src="{{ url_for('static', filename='musica-inicio.mp3') }}" preload="auto"></audio>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
